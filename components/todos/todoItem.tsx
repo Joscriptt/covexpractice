@@ -161,12 +161,18 @@ export default function TodoItem({ todo }: { todo: Doc<"todos"> }) {
           </span>
         )}
         <Button
+          disabled={form.formState.isSubmitted}
           onClick={handleDelete}
           variant="secondary"
           size="icon"
           className="hover:bg-destructive group/button transition-colors"
         >
-          <Trash2Icon className="text-destructive group-hover/button:text-destructive-foreground" />
+          {form.formState.isSubmitted ? (
+            "Deleting"
+          ) : (
+            <Trash2Icon className="text-destructive group-hover/button:text-destructive-foreground" />
+          )}
+          {/* <Trash2Icon className="text-destructive group-hover/button:text-destructive-foreground" /> */}
         </Button>
       </div>
     </Form>

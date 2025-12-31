@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="w-full max-w-3xl mx-auto flex flex-col gap-4">
       {/* <h1>Welcome to the Home Page</h1> */}
-      {/* <CreateTodo /> */}
+      <CreateTodo />
       <TodoList />
     </div>
   );

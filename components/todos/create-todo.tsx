@@ -61,8 +61,8 @@ export default function CreateTodo() {
   };
 
   const handleCreateTodo = async (data: TodoFormData) => {
-    console.log(data);
-    console.log(form.formState.errors);
+    // console.log(data);
+    // console.log(form.formState.errors);
     try {
       await createTodo({ title: data.title, completed: false });
       form.reset();

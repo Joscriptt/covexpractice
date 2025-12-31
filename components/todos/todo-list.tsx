@@ -31,7 +31,7 @@ export default function TodoList() {
 
   return (
     <div className="space-y-2">
-      <CreateTodo />
+      {/* <CreateTodo /> */}
 
       {todos.map((todo) => (
         <TodoItem key={todo._id} todo={todo} />
