@@ -20,6 +20,7 @@ type TodoForm = z.infer<typeof updateTodoSchema>;
 export default function TodoItem({ todo }: { todo: Doc<"todos"> }) {
   const [isChecked, setIsChecked] = useState(todo.completed);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const updateTodo = useMutation(api.todos.updateTodo);
   const deleteTodo = useMutation(api.todos.deleteTodo);
@@ -107,7 +108,12 @@ export default function TodoItem({ todo }: { todo: Doc<"todos"> }) {
   };
 
   const handleDelete = async () => {
-    await deleteTodo({ id: todo._id });
+    setIsDeleting(true);
+    try {
+      await deleteTodo({ id: todo._id });
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -161,18 +167,17 @@ export default function TodoItem({ todo }: { todo: Doc<"todos"> }) {
           </span>
         )}
         <Button
-          disabled={form.formState.isSubmitted}
+          disabled={isDeleting}
           onClick={handleDelete}
           variant="secondary"
-          size="icon"
-          className="hover:bg-destructive group/button transition-colors"
+          // size="icon"
+          className="w-px-8"
         >
-          {form.formState.isSubmitted ? (
-            "Deleting"
+          {isDeleting ? (
+            <p className="text-destructive w-fit">Deleting</p>
           ) : (
             <Trash2Icon className="text-destructive group-hover/button:text-destructive-foreground" />
           )}
-          {/* <Trash2Icon className="text-destructive group-hover/button:text-destructive-foreground" /> */}
         </Button>
       </div>
     </Form>
