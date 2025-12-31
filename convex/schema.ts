@@ -7,5 +7,6 @@ export default defineSchema({
   todos: defineTable({
     title: v.string(),
     completed: v.boolean(),
+    userId: v.id("users"),
   }),
 });
